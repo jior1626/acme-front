@@ -1,4 +1,4 @@
-export interface Card {
+export interface Car {
     id?: string;
     registration: string;
     color: string;
