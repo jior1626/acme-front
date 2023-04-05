@@ -1,0 +1,10 @@
+/* .content-pull-right {
+    display: flex;
+    justify-content: right !important;
+
+} */
+
+.card-header {
+    display: flex !important;
+    justify-content: space-between !important;
+}
