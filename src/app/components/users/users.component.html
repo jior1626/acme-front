@@ -20,19 +20,28 @@
 				<div class="tab-pane active" id="users" role="tabpanel" aria-labelledby="users-tab" tabindex="0">
 					<div class="card">
 						<div class="card-header">
-							<h5>
+							<h5 *ngIf="!showForm">
 								<i class="bi bi-people-fill"></i>
 								Listar Usuarios
 							</h5>
+							<h5 *ngIf="showForm">
+								<i class="bi bi-people-fill"></i>
+								Crear Usuarios
+							</h5>
 							<div class="content-pull-right">	
-								<button type="button" class="btn btn-success">
+								<button *ngIf="!showForm" (click)="showForm = true" type="button" class="btn btn-success">
 									<i class="bi bi-person-plus-fill"></i>
 									Crear Usuario
+								</button>
+								<button *ngIf="showForm" (click)="showForm = false" type="button" class="btn btn-dark">
+									<i class="bi bi-card-list"></i>
+									Listar Usuarios
 								</button>	
 							</div>
 						</div>
 						<div class="card-body">
-							<app-list-users></app-list-users>
+							<app-list-users *ngIf="!showForm" (editUserEvent)="editUser($event)"></app-list-users>
+							<app-form-users *ngIf="showForm" [user]="userData" [showForm]="showForm"></app-form-users>
 						</div>
 					</div>
 

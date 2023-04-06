@@ -15,6 +15,9 @@ import { ListCarsComponent } from './components/cars/list-cars/list-cars.compone
 import { FormCarsComponent } from './components/cars/form-cars/form-cars.component';
 import { CarsComponent } from './components/cars/cars.component';
 import { UsersService } from './services/Users.service';
+import { CommonModule } from '@angular/common';
+
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,9 @@ import { UsersService } from './services/Users.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    CommonModule,
     HttpClientModule,
+    ReactiveFormsModule,
     // StoreModule.forRoot(reducers),
     // EffectsModule.forRoot([CarEffect])
   ],

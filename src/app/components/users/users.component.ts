@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-users',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UsersComponent implements OnInit {
 
+  showForm: boolean = false;
+  userData: User = {};
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  editUser(data: User) {
+    this.userData = data;
+    this.showForm = true;
+  }
+
+  createUser() {
+    this.showForm = true;
   }
 
 }

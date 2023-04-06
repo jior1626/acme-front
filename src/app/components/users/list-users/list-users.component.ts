@@ -1,24 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { User } from 'src/app/models/user';
 import { UsersService } from 'src/app/services/Users.service';
 
 @Component({
-  selector: 'app-list-users',
-  templateUrl: './list-users.component.html',
-  styleUrls: ['./list-users.component.css']
+	selector: 'app-list-users',
+	templateUrl: './list-users.component.html',
+	styleUrls: ['./list-users.component.css']
 })
 export class ListUsersComponent implements OnInit {
 
-  constructor(
-    private userServices: UsersService
-  ) { }
+	users: User[] = [];
 
-  ngOnInit() {
-    this.listUsers();
-  }
+	@Output() editUserEvent = new EventEmitter();
 
-  listUsers() {
-    let data = this.userServices.getDrivers().subscribe(data => data);
-    console.log("data", data)
-  }
+	constructor(
+		private userServices: UsersService
+	) { }
+
+	ngOnInit() {
+		this.listUsers();
+	}
+
+	listUsers() {
+		this.userServices.getDrivers().subscribe((results: User[]) => {
+			this.users = results;
+		});
+	}
+
+	editUser(item: User) {
+		this.editUserEvent.emit(item);
+	}
 
 }
