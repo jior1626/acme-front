@@ -6,4 +6,6 @@ export interface Car {
     type?: string;
     owner_id?: string;
     driver_i?: string;
+    created_at?: string;
+    updated_at?: string;
 }

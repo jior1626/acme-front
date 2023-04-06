@@ -41,7 +41,7 @@
 						</div>
 						<div class="card-body">
 							<app-list-users *ngIf="!showForm" (editUserEvent)="editUser($event)"></app-list-users>
-							<app-form-users *ngIf="showForm" [user]="userData" [showForm]="showForm"></app-form-users>
+							<app-form-users *ngIf="showForm" [user]="userData" [showForm]="showForm" (loadUsers)="loadUsers($event)"></app-form-users>
 						</div>
 					</div>
 

@@ -16,6 +16,10 @@ export class UsersComponent implements OnInit {
   ngOnInit() {
   }
 
+  loadUsers(event: any) {
+    this.showForm = false;
+  }
+
   editUser(data: User) {
     this.userData = data;
     this.showForm = true;

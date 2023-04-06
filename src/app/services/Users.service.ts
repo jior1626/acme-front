@@ -6,6 +6,7 @@ import { User } from '../models/user';
 import { Observable, throwError } from "rxjs";
 import { catchError } from 'rxjs/operators';
 import { Response } from '../models/response';
+import Swal from 'sweetalert2';
 
 @Injectable({
 	providedIn: 'root'
@@ -101,7 +102,11 @@ export class UsersService {
 		  // Get server-side error
 		  errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
 		}
-		console.log(errorMessage);
+		Swal.fire({
+            icon: "error",
+            title: "Ha ocurrido un error!",
+            text: errorMessage,
+        })
 		return throwError(errorMessage);
 	}
 

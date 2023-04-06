@@ -1,3 +1,5 @@
+import { Car } from "./car";
+
 export interface User {
     id?: string;
     nit?: string;
@@ -8,4 +10,8 @@ export interface User {
     phone?: string;
     city?: string;
     type?: string;
+    owner_cars?: Car[];
+    driver_cars?: Car[];
+    created_at?: string;
+    updated_at?: string;
 }
