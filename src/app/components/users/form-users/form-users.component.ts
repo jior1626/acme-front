@@ -44,8 +44,6 @@ export class FormUsersComponent implements OnInit {
 				this.arrayCars = [];
 				this.showOwner = false;
 			}
-			// console.log("console", data);
-			
 		}
 	}
 
@@ -111,22 +109,24 @@ export class FormUsersComponent implements OnInit {
 			}
 		}
 
-		console.log("data", data);
-		
-		
-		// if(this.actionForm == 1) {
-		// 	this.userServices.saveUser(data).subscribe((response: Response) => {
-		// 		this.showAlert('success', 'Correcto', 'Información Guardada correctamente');
-		// 		this.showForm = false;
-		// 	});
-		// } else {
-		// 	this.userServices.updateUser(data, this.userId).subscribe((response: Response) => {
-		// 		this.showAlert('success', 'Correcto', 'Información Actualizada correctamente');
-		// 		this.showForm = false;	
-		// 	});
-		// }
+		if(this.f["type"].value == "owner" && this.arrayCars.length == 0) {
+			this.showAlert('error', 'Oopps', 'Debe agregar minimo un vehiculo')
+			return;
+		}
 
-		// this.onReset();
+		if(this.actionForm == 1) {
+			this.userServices.saveUser(data).subscribe((response: Response) => {
+				this.showAlert('success', 'Correcto', 'Información Guardada correctamente');
+				this.showForm = false;
+			});
+		} else {
+			this.userServices.updateUser(data, this.userId).subscribe((response: Response) => {
+				this.showAlert('success', 'Correcto', 'Información Actualizada correctamente');
+				this.showForm = false;	
+			});
+		}
+
+		this.onReset();
 		
 	}
 
@@ -158,6 +158,20 @@ export class FormUsersComponent implements OnInit {
 		let brand = this.f["brand"].value;
 		let typeCar = this.f["type_car"].value;
 
+		if(registration == "") {
+			this.showAlert("error", "Oppps...", "Ingresar la matricula del vehiculo!");
+			return
+		} else if	(color == "") {
+			this.showAlert("error", "Oppps...", "Ingresar el color del vehiculo!");
+			return
+		} else if	(brand == "") {
+			this.showAlert("error", "Oppps...", "Ingresar la marca del vehiculo!");
+			return
+		} else if (typeCar == "") {
+			this.showAlert("error", "Oppps...", "Ingresar el tipo de vehiculo!");
+			return
+		}
+
 		let itemFind = this.arrayCars.find(item => item.registration == registration);
 
 		if(itemFind) {
@@ -176,4 +190,8 @@ export class FormUsersComponent implements OnInit {
 		this.clearInputsAddCars();
 	}
 
+	deleteItem(i: number, car: Car) {
+		this.arrayCars = this.arrayCars.filter(item => item.registration !== car.registration);
+	}
+ 
 }
