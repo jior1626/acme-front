@@ -40,6 +40,8 @@ export class FormUsersComponent implements OnInit {
 				this.showOwner = true;
 				this.arrayCars = [];
 				this.arrayCars = data.owner_cars ? data.owner_cars : [];
+				console.log("cars", data.owner_cars);
+				
 			} else{
 				this.arrayCars = [];
 				this.showOwner = false;
@@ -118,16 +120,15 @@ export class FormUsersComponent implements OnInit {
 			this.userServices.saveUser(data).subscribe((response: Response) => {
 				this.showAlert('success', 'Correcto', 'Información Guardada correctamente');
 				this.showForm = false;
+				this.onReset();
 			});
 		} else {
 			this.userServices.updateUser(data, this.userId).subscribe((response: Response) => {
 				this.showAlert('success', 'Correcto', 'Información Actualizada correctamente');
 				this.showForm = false;	
+				this.onReset();
 			});
 		}
-
-		this.onReset();
-		
 	}
 
 	onReset(): void {
@@ -181,6 +182,7 @@ export class FormUsersComponent implements OnInit {
 		}
 
 		this.arrayCars.push({
+			id: "",
 			registration: registration,
 			color: color,
 			brand: brand,

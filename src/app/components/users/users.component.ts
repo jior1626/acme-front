@@ -16,9 +16,9 @@ export class UsersComponent implements OnInit {
   ngOnInit() {
   }
 
-  loadUsers(event: any) {
-    this.showForm = false;
-  }
+  // loadUsers(event: any) {
+  //   this.showForm = false;
+  // }
 
   editUser(data: User) {
     this.userData = data;
@@ -26,7 +26,13 @@ export class UsersComponent implements OnInit {
   }
 
   createUser() {
+    this.userData = {};
     this.showForm = true;
+  }
+
+  listUsers() {
+    this.userData = {};
+    this.showForm = false;
   }
 
 }
