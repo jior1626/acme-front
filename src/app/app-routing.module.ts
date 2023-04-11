@@ -4,20 +4,20 @@ import { UsersComponent } from './components/users/users.component';
 import { CarsComponent } from './components/cars/cars.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: UsersComponent,
-    children: [
-      	{
-      		path: '/:id/cars',
-			component: CarsComponent
-    	}
-	]
-  }
+	{
+		path: '',
+		component: UsersComponent,
+		// children: [
+		// 	{
+		// 		path: ':id/cars',
+		// 		component: CarsComponent
+		// 	}
+		// ]
+	}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+	imports: [RouterModule.forRoot(routes)],
+	exports: [RouterModule]
 })
 export class AppRoutingModule { }

@@ -1,3 +1,198 @@
-<p>
-  form-users works!
-</p>
+<div class="row">
+	<div class="col-lg-12 mt-4">
+		<form [formGroup]="userForm" (ngSubmit)="onFormSubmit()">
+			<input type="hidden" id="id" name="id">
+			<div class="row">
+				<div class="col-lg-2">
+					<div class="form-group">
+						<div class="form-floating mb-3">
+							<input type="text" class="form-control"
+								[ngClass]="{ 'is-invalid': formSubmit && f['nit'].errors }" id="nit" name="nit"
+								formControlName="nit" placeholder="Digite el nit...">
+							<label for="nit">Documento <span class="text-danger">*</span>
+							</label>
+						</div>
+						<div *ngIf="formSubmit && f['nit'].errors" class="invalid-feedback">
+							<div *ngIf="f['nit'].errors['required']">Nit es requerido</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3">
+					<div class="form-group">
+						<div class="form-floating mb-3">
+							<input type="text" class="form-control"
+								[ngClass]="{ 'is-invalid': formSubmit && f['firstname'].errors }" id="firstname"
+								name="firstname" formControlName="firstname" placeholder="Digite el primer nombre...">
+							<label for="firstname">Primer Nombre <span class="text-danger">*</span></label>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3">
+					<div class="form-group">
+						<div class="form-floating mb-3">
+							<input type="text" class="form-control" id="lastname" name="lastname"
+								formControlName="lastname" placeholder="Digite el segundo nombre...">
+							<label for="lastname">Segundo Nombre</label>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<div class="form-group">
+						<div class="form-floating mb-3">
+							<input type="text" class="form-control"
+								[ngClass]="{ 'is-invalid': formSubmit && f['surnames'].errors }" id="surnames"
+								name="surnames" formControlName="surnames" placeholder="Digite los apellidos...">
+							<label for="surnames">Apellidos <span class="text-danger">*</span></label>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-lg-2">
+					<div class="form-group">
+						<div class="form-floating mb-3">
+							<input type="text" class="form-control"
+								[ngClass]="{ 'is-invalid': formSubmit && f['city'].errors }" id="city" name="city"
+								formControlName="city" placeholder="Digite la ciudad...">
+							<label for="city">Ciudad <span class="text-danger">*</span></label>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3">
+					<div class="form-group">
+						<div class="form-floating mb-3">
+							<input type="text" class="form-control"
+								[ngClass]="{ 'is-invalid': formSubmit && f['address'].errors }" id="address"
+								name="address" formControlName="address" placeholder="Digite la dirección...">
+							<label for="address">Dirección <span class="text-danger">*</span></label>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3">
+					<div class="input-group mb-3">
+						<div class="form-floating">
+							<input type="text" class="form-control"
+								[ngClass]="{ 'is-invalid': formSubmit && f['phone'].errors }" id="phone" name="phone"
+								formControlName="phone" placeholder="Digite el numero de Telefóno...">
+							<label for="phone">Telefóno</label>
+						</div>
+						<span class="input-group-text">
+							<i class="bi bi-telephone-fill"></i>
+						</span>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<div class="form-group mb-3">
+						<div class="form-floating">
+							<select id="type" name="type" formControlName="type" class="form-control form-select"
+								(change)="changeType($event)"
+								[ngClass]="{ 'is-invalid': formSubmit && f['type'].errors }"
+								aria-label="Floating label select example">
+								<option value="">Seleccionar...</option>
+								<option value="owner">Propietario</option>
+								<option value="driver">Conductor</option>
+							</select>
+							<label for="type">Tipo</label>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row" *ngIf="showOwner">
+				<h4 class="mt-5">Información del vehiculo</h4>
+				<hr class="mb-5 mr-2 ml-2">
+				<div class="col-lg-3">
+					<div class="form-group mb-3">
+						<div class="form-floating">
+							<input type="text" class="form-control"
+								[ngClass]="{ 'is-invalid': formSubmit && f['registration'].errors }" id="registration"
+								name="registration" formControlName="registration"
+								placeholder="Digite el numero de Telefóno...">
+							<label for="registration">Matricula <span class="text-danger">*</span></label>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-2">
+					<div class="form-group mb-3">
+						<div class="form-floating">
+							<input type="color" class="form-control"
+								[ngClass]="{ 'is-invalid': formSubmit && f['color'].errors }" id="color" name="color"
+								formControlName="color" placeholder="Digite el numero de Telefóno...">
+							<label for="color">Color <span class="text-danger">*</span></label>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3">
+					<div class="form-group mb-3">
+						<div class="form-floating">
+							<input type="text" class="form-control"
+								[ngClass]="{ 'is-invalid': formSubmit && f['brand'].errors }" id="brand" name="brand"
+								formControlName="brand" placeholder="Digite el numero de Telefóno...">
+							<label for="brand">Marca</label>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3">
+					<div class="form-group mb-3">
+						<div class="form-floating">
+							<select id="type_car" name="type_car" formControlName="type_car"
+								class="form-control form-select"
+								[ngClass]="{ 'is-invalid': formSubmit && f['type_car'].errors }"
+								aria-label="Floating label select example">
+								<option value="">Seleccionar...</option>
+								<option value="public">Publico</option>
+								<option value="particular">Particular</option>
+							</select>
+							<label for="type_car">Tipo</label>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-1">
+					<div class="p-3">
+						<button type="button" (click)="addCarToArray()" class="btn btn-success btn-md">
+							<i class="bi bi-plus-circle-dotted"></i>
+						</button>
+					</div>
+				</div>
+				<div class="row mt-4">
+					<div class="col-lg-12">
+						<table class="table table-striped table-responsive table-bordered table-condensed">
+							<thead class="thead-inverse text-center">
+								<tr>
+									<th>Matricula</th>
+									<th>Marca</th>
+									<th>Color</th>
+									<th>Tipo</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr *ngFor="let car of arrayCars; index as i">
+									<td>{{car.registration}}</td>
+									<td>{{car.brand}}</td>
+									<td class="text-center"><button type="button" [ngStyle]="{background: car.color}">
+										<i class="bi bi-car-front"></i>
+									</button></td>
+									<td class="text-center">
+										{{car.type == "particular" ? "Particular" : "Publico"}}
+									</td>
+									<td class="text-center">
+										<button type="button" (click)="deleteItem(i, car)" class="btn btn-xs btn-danger">
+											<i class="bi bi-trash-fill"></i>
+										</button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+
+			<div class="d-grid gap-2 mt-4 mb-4">
+				<button class="btn btn-primary" type="submit">Guardar</button>
+			</div>
+
+		</form>
+	</div>
+</div>
